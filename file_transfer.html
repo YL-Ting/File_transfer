@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第四題 - 檔案上傳、下載、刪除與重新上傳</title>
+</head>
+<body>
+    <h1>第四題 - 檔案上傳、下載、刪除與重新上傳</h1>
+    <p>請上傳.pdf或.txt檔</p>
+    <p>檔案大小上限5MB，保留5分鐘</p>
+    <form action="/file" method="post" enctype="multipart/form-data">
+        <input type="file">
+        <input type="submit" value="送出">
+        <button>取消</button>
+    </form>
+</body>
+</html>
