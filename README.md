@@ -9,9 +9,9 @@
 ---
 - file_transfer.html
     - [x] follow the description to design the web layout
-    - [ ] web beautify
+    - [x] web beautify
     - [ ] upload file function
-    - [ ] limit the filetype and filesize
+    - [x] limit the filetype and filesize
     - [ ] download file function
     - [ ] delete file function
     - [ ] reupload file function
@@ -23,3 +23,4 @@
 ## Development log
 ---
 2022/06/16 - create html file and design the layout
+2022/06/17 - make web beautiful and filesize limit function 

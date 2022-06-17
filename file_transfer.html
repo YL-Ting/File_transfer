@@ -5,15 +5,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>第四題 - 檔案上傳、下載、刪除與重新上傳</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 </head>
 <body>
     <h1>第四題 - 檔案上傳、下載、刪除與重新上傳</h1>
     <p>請上傳.pdf或.txt檔</p>
-    <p>檔案大小上限5MB，保留5分鐘</p>
-    <form action="/file" method="post" enctype="multipart/form-data">
-        <input type="file">
-        <input type="submit" value="送出">
-        <button>取消</button>
+    <p class="text-warning ">檔案大小上限5MB，保留5分鐘</p>
+    <form name="Upform" action="upload.php" method="post" enctype="multipart/form-data">
+        <div class="mb-3 w-auto btn btn-secondary">
+            <input id="Upfile" name="Upfile" type="file" accept="application/pdf,text/plain">
+            <button class="btn">
+                <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                </svg>
+            </button>
+            
+        </div>
+        <div class="my-4"></div>
+        <div class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
+                <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707V11.5z"/>
+                <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5v2z"/>
+            </svg>
+            <input class="btn btn-primary" type="submit" onclick="checkFile()" value="送出">
+        </div>
+        <div class="btn btn-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+            </svg>
+            <button class="btn btn-dark" >取消</button>
+        </div>
+
     </form>
+
+    <script language="JavaScript" type="text/javascript">
+        var fileSize = 0; //檔案大小
+        var SizeLimit = 5*1024*1024;  //上傳上限，單位:byte
+    
+        function checkFile() {
+            var f = document.getElementById("Upfile");
+            //FOR IE
+            // if ($.browser.msie) {
+            //     var img = new Image();
+            //     img.onload = checkSize;
+            //     img.src = f.value;
+            // }
+            //FOR Firefox,Chrome
+            // else {
+                fileSize = f.files.item(0).size;
+                checkSize();
+            // }
+        }
+    
+        //檢查檔案大小
+        function checkSize() {
+            //FOR IE FIX
+            // if ($.browser.msie) {
+            //     fileSize = this.fileSize;
+            // }
+            if (fileSize > SizeLimit) {
+                Message((fileSize / (1024*1024)).toPrecision(4), (SizeLimit / (1024*1024)).toPrecision(2));
+            } else {
+                document.Upform.submit();
+                // upfile = document.getElementById('Upfile');
+                // upfile.addEventListener("change",function(){})
+            }
+        }
+    
+        function Message(file, limit) {
+            var msg = "您所選擇的檔案大小為 " + file + " MB\n已超過上傳上限 " + limit + " MB\n不允許上傳！"
+            alert(msg);
+        } 
+    </script>
 </body>
 </html>
